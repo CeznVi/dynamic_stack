@@ -109,6 +109,8 @@ bool DynamicStack<T, size>::isFull() const
 template<class T, size_t size>
 void DynamicStack<T, size>::clear()
 {
+	delete[] data;
+	top = 0;
 }
 
 template<class T, size_t size>

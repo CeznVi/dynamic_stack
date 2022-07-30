@@ -28,7 +28,9 @@ int main()
 	stack.print();
 	cout << stack.peek() << endl;
 	cout << "Довжина: " << stack.length() << '\n';
-
+	stack.clear();
+	stack.print();
+	cout << "Довжина: " << stack.length() << '\n';
 
 
 	return 0;
