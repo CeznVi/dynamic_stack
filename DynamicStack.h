@@ -36,6 +36,10 @@ DynamicStack<T, size>::~DynamicStack()
 template<class T, size_t size>
 DynamicStack<T, size>::DynamicStack(initializer_list<T> list)
 {
+	for (T l : list)
+	{
+		push(l);
+	}
 }
 
 template<class T, size_t size>
@@ -44,43 +48,62 @@ DynamicStack<T, size>::DynamicStack(const DynamicStack& s)
 }
 
 template<class T, size_t size>
-DynamicStack& DynamicStack<T, size>::operator=(const DynamicStack& s)
-{
-	// TODO: вставьте здесь оператор return
-}
-
-template<class T, size_t size>
 void DynamicStack<T, size>::push(const T& value)
 {
+	if (top < size)
+	{
+		T* temp = new T[top];
+
+		for (size_t i{}; i < top; i++)
+			temp[i] = this->data[i];
+
+		delete[] data;
+		top++;
+
+		data = new T[top];
+
+		for (size_t i{}; i < top - 1; i++)
+			this->data[i] = temp[i];
+
+		delete[] temp;
+
+		data[top-1] = value;
+	}
+
 }
 
 template<class T, size_t size>
 void DynamicStack<T, size>::pop()
 {
+	if (top > 0)
+	{
+		top--;
+	}
 }
 
 template<class T, size_t size>
 T DynamicStack<T, size>::peek() const
 {
-	return T();
+	assert(top > 0);
+	return data[top - 1];
 }
 
 template<class T, size_t size>
 size_t DynamicStack<T, size>::length() const
 {
-	return size_t();
+	return top;
 }
 
 template<class T, size_t size>
 bool DynamicStack<T, size>::isEmpty() const
 {
-	return false;
+	return top == 0;
 }
 
 template<class T, size_t size>
 bool DynamicStack<T, size>::isFull() const
 {
-	return false;
+	return top == size;
 }
 
 template<class T, size_t size>
@@ -91,4 +114,9 @@ void DynamicStack<T, size>::clear()
 template<class T, size_t size>
 void DynamicStack<T, size>::print() const
 {
+	for (size_t i = 0; i < top; i++)
+	{
+		cout << data[i] << " ";
+	}
+	cout << endl;
 }
