@@ -21,17 +21,18 @@ int main()
 	stack.pop();
 	stack.pop();
 	stack.print();
-
 	stack.push(99);
 	stack.push(99);
 	stack.print();
 	cout << stack.peek() << endl;
 	cout << "Довжина: " << stack.length() << '\n';
-	//stack.clear();
 	stack.print();
 	cout << "Довжина: " << stack.length() << '\n';
 	stack2 = stack;
 	cout << "Стек2 копіювання: " << '\n';
+	stack2.print();
+	cout << "Виконання очистки \n";
+	stack2.clear();
 	stack2.print();
 
 

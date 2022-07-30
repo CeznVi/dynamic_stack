@@ -23,7 +23,7 @@ public:
 	{
 		if (this == &s)
 			return *this;
-
+		
 		this->~DynamicStack();
 
 		this->top = s.top;
@@ -133,13 +133,17 @@ bool DynamicStack<T, size>::isFull() const
 template<class T, size_t size>
 void DynamicStack<T, size>::clear()
 {
-	delete[] data;
-	top = 0;
+	delete[] this->data;
+	this->data = nullptr;
+	this->top = 0;
 }
 
 template<class T, size_t size>
 void DynamicStack<T, size>::print() const
 {
+	if (top == 0)
+		cout << "Данних немає";
+	else
 	for (size_t i = 0; i < top; i++)
 	{
 		cout << data[i] << " ";
