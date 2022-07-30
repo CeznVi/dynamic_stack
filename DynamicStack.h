@@ -6,6 +6,7 @@
 using namespace std;
 
 //size - мається на увазі максимальний розмір стеку
+
 template<class T, size_t size>
 class DynamicStack
 {
@@ -17,7 +18,24 @@ public:
 	~DynamicStack();
 	DynamicStack(initializer_list<T> list);
 	DynamicStack(const DynamicStack& s);
-	DynamicStack& operator=(const DynamicStack& s);
+
+	DynamicStack& operator=(const DynamicStack& s)
+	{
+		if (this == &s)
+			return *this;
+
+		this->~DynamicStack();
+
+		this->top = s.top;
+		this->data = new T[s.top];
+		
+		for (size_t i{}; i < this->top; i++)
+			this->data[i] = s.data[i];
+
+		return *this;
+
+	}
+
 	void push(const T& value);
 	void pop();
 	T peek() const;
@@ -31,6 +49,7 @@ public:
 template<class T, size_t size>
 DynamicStack<T, size>::~DynamicStack()
 {
+	clear();
 }
 
 template<class T, size_t size>
@@ -45,6 +64,11 @@ DynamicStack<T, size>::DynamicStack(initializer_list<T> list)
 template<class T, size_t size>
 DynamicStack<T, size>::DynamicStack(const DynamicStack& s)
 {
+	this->data = new T[s.top];
+	this->top = s.top;
+
+	for (size_t i{}; i < s.top; i++)
+		this->data[i] = s.data[i];
 }
 
 template<class T, size_t size>

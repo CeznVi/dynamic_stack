@@ -2,14 +2,13 @@
 #include <Windows.h>
 #include "DynamicStack.h"
 
-
-
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	DynamicStack<int, 4> stack{ 10,2,2,3,4,2 };
+	DynamicStack<int, 5> stack{ 10,2,2,3,4,2 };
+	DynamicStack<int, 5> stack2;
 	stack.print();
 	stack.push(1111);
 	stack.print();
@@ -28,9 +27,12 @@ int main()
 	stack.print();
 	cout << stack.peek() << endl;
 	cout << "Довжина: " << stack.length() << '\n';
-	stack.clear();
+	//stack.clear();
 	stack.print();
 	cout << "Довжина: " << stack.length() << '\n';
+	stack2 = stack;
+	cout << "Стек2 копіювання: " << '\n';
+	stack2.print();
 
 
 	return 0;
